@@ -1,0 +1,99 @@
+							          Online Bookstore RESTful API
+
+									   Murat ÇİMEN
+
+
+
+
+Spring Framework / Spring Boot / H2 Database / AOP / Bucket4j / Spring Web / Spring Security / Spring Data REST / 
+
+Spring Data JPA / Spring Boot DevTools / Spring Annotations / Spring RESTful Controller / Springfox Swagger2 / 
+
+Springfox Swagger UI/ Spring Boot Starter Test / HTTP Request/Response / Custom Exception Handling
+
+
+USERS
+username               password
+
+ahmet                  test123
+mehmet	               test123
+murat(admin)	       test123
+
+
+
+- Book:
+- `GET /books`: Retrieve a list of all books ordered by creation date         (+)    http://localhost:8090/books
+DESC.
+- `GET /books/{isbn}`: Retrieve details of a book by ISBN.                    (+)    http://localhost:8090/books/1
+- `POST /books`: Add a new book (Admin only).                                 (+)    http://localhost:8090/books
+- `PUT /books/{isbn}`: Update details of a book (Admin only).                 (+)    http://localhost:8090/books/1542
+- `DELETE /books/{isbn}`: Delete a book by ISBN (Admin only).
+
+
+- User:
+- `POST /users/signup`: Register a new user.                                  (+)    http://localhost:8090/users/signup
+- `POST /users/login`: Authenticate a user and return a token (JWT            (+)    http://localhost:8090/users/login
+preferred).
+
+
+- Order:
+- `POST /orders`: Place a new order for a user with a minimum price of        (+)    http://localhost:8090/orders
+25$.
+- `GET /orders/{userId}`: Get all orders for a specific user ordered by       (+)    http://localhost:8090/orders/1
+update date DESC.
+- `GET /orders/details/{orderId}`: Get details of a specific order by its ID  (+)    http://localhost:8090/orders/details/1
+with the books under that order. 
+
+
+*** BONUS ***
+- Implement pagination 
+- Implement HATEOAS 
+- Add a simple rate-limiting mechanism to prevent abuse.
+
+
+
+USER JSON                                     http://localhost:8090/api/users  &  http://localhost:8090/users/signup
+
+{
+  "id":"9",
+  "name": "Ahmet Yılmaz",
+  "email": "ahmet@example.com",
+  "password": "parola123",
+  "created_at": "2023-11-05T14:30:00",
+  "updated_at": "2023-11-05T14:30:00"
+}
+
+
+ORDER JSON                                   http://localhost:8090/api/orders 
+
+{
+  "user_id": 1,
+  "total_price": 70.0,
+  "order_date": "2023-11-05",
+  "created_at": "2023-11-05T14:30:00",
+  "updated_at": "2023-11-05T14:30:00",
+  "books": [
+    {
+      "book_id": 1,
+      "quantity": 2
+    },
+    {
+      "book_id": 2,
+      "quantity": 1
+    }
+  ]
+}
+
+
+
+BOOK JSON                                     http://localhost:8090/books
+
+{
+    "isbn": 123456,
+    "title": "Örnek Kitap",
+    "author": "Örnek Yazar",
+    "price": 29.99,
+    "stock_quantity": 100,
+    "created_at": "2023-11-06T10:00:00",
+    "updated_at": "2023-11-06T10:00:00"
+}
